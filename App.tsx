@@ -161,7 +161,7 @@ const App: React.FC = () => {
           <div className="flex items-center gap-4 cursor-pointer group" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <div className="w-14 h-14 rounded-full border-2 border-buddy-gold bg-white shadow-lg group-hover:rotate-6 transition-transform overflow-hidden flex items-center justify-center">
                {/* Buddy Logo: logo.png */}
-               <img src="/logo.png" alt="VV Buddy logo className="w-full h-full object-cover" />
+               <img src="/logo.png" alt="VV Buddy logo" className="w-full h-full object-cover" />
             </div>
             <span className={`font-bold text-2xl tracking-tight transition-colors duration-300 ${scrolled ? 'text-white' : 'text-buddy-teal'}`}>VV Buddy</span>
           </div>
