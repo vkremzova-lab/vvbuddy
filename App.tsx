@@ -21,7 +21,7 @@ import {
   Zap,
 } from "lucide-react";
 
-/* ---------------- helpers ---------------- */
+/* ---------- helpers ---------- */
 
 const FloatingOrb = ({
   color,
@@ -84,16 +84,163 @@ const SectionHeader = ({
   </div>
 );
 
-/* ---------------- app ---------------- */
+/* ---------- cards ---------- */
+
+const FeatureCard = ({
+  title,
+  text,
+  img,
+  delay,
+  icon: Icon,
+}: {
+  title: string;
+  text: string;
+  img: string;
+  delay: number;
+  icon: any;
+}) => (
+  <motion.div
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8, delay }}
+    viewport={{ once: true }}
+    className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-[3rem] overflow-hidden shadow-2xl h-full flex flex-col"
+  >
+    <div className="h-64 overflow-hidden relative">
+      <div className="absolute inset-0 bg-buddy-teal/20 group-hover:bg-transparent transition-colors duration-700 z-10" />
+      <img
+        src={img}
+        alt={title}
+        className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000"
+      />
+      <div className="absolute bottom-6 left-6 z-20 bg-white/90 backdrop-blur-md p-3 rounded-2xl shadow-xl text-buddy-teal">
+        <Icon size={24} />
+      </div>
+    </div>
+    <div className="p-10 flex-1 flex flex-col">
+      <h3 className="text-2xl font-serif font-bold mb-4 text-white group-hover:text-buddy-gold transition-colors">
+        {title}
+      </h3>
+      <p className="text-white/70 leading-relaxed text-sm">{text}</p>
+    </div>
+  </motion.div>
+);
+
+const PriceCard = ({
+  title,
+  price,
+  features,
+  href,
+  isFeatured = false,
+  badge,
+}: {
+  title: string;
+  price: string;
+  features: string[];
+  href: string;
+  isFeatured?: boolean;
+  badge?: string;
+}) => (
+  <div
+    className={`group relative flex flex-col rounded-[3rem] transition-all duration-500 ${
+      isFeatured ? "md:scale-110 z-20" : "z-10"
+    }`}
+  >
+    {badge && (
+      <div
+        className={`absolute -top-6 left-1/2 -translate-x-1/2 px-6 py-2 rounded-t-2xl text-[10px] font-black tracking-[0.2em] shadow-lg z-30 flex items-center gap-2 ${
+          isFeatured
+            ? "bg-buddy-gold text-buddy-teal"
+            : "bg-white text-buddy-teal"
+        }`}
+      >
+        <Sparkles size={12} /> {badge}
+      </div>
+    )}
+
+    <div
+      className={`relative flex flex-col h-full rounded-[3rem] overflow-hidden shadow-2xl border transition-all duration-500 ${
+        isFeatured
+          ? "bg-buddy-teal border-buddy-gold/50"
+          : "bg-white border-buddy-light"
+      }`}
+    >
+      <div
+        className={`p-10 text-center ${
+          isFeatured ? "bg-white/5" : "bg-buddy-gold/10"
+        }`}
+      >
+        <h3
+          className={`font-bold text-lg mb-2 uppercase tracking-widest ${
+            isFeatured ? "text-buddy-gold" : "text-buddy-teal"
+          }`}
+        >
+          {title}
+        </h3>
+        <p
+          className={`text-4xl font-black ${
+            isFeatured ? "text-white" : "text-buddy-teal"
+          }`}
+        >
+          {price}
+        </p>
+      </div>
+
+      <div className="px-10 py-10 flex-1 flex flex-col">
+        <ul className="space-y-5 mb-10 flex-1">
+          {features.map((f, i) => (
+            <li key={i} className="flex items-start gap-4 text-sm">
+              <div
+                className={`mt-0.5 rounded-full p-1 ${
+                  isFeatured
+                    ? "bg-buddy-gold/20"
+                    : "bg-buddy-teal/10"
+                }`}
+              >
+                <CheckCircle2
+                  size={14}
+                  className={
+                    isFeatured ? "text-buddy-gold" : "text-buddy-teal"
+                  }
+                />
+              </div>
+              <span
+                className={
+                  isFeatured ? "text-white/80" : "text-buddy-dark/80"
+                }
+              >
+                {f}
+              </span>
+            </li>
+          ))}
+        </ul>
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`w-full py-5 text-center font-bold rounded-2xl transition-all block shadow-xl ${
+            isFeatured
+              ? "bg-buddy-gold text-buddy-teal hover:bg-white"
+              : "bg-buddy-teal text-white hover:bg-buddy-gold hover:text-buddy-teal"
+          }`}
+        >
+          Začít cestu
+        </a>
+      </div>
+    </div>
+  </div>
+);
+
+/* ---------- app ---------- */
 
 const App: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const scrollTo = (id: string) => {
@@ -108,19 +255,11 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen font-sans overflow-x-hidden">
-      {/* background */}
       <FloatingOrb
         color="bg-buddy-teal"
         size="w-[600px] h-[600px]"
         top="-100px"
         left="-200px"
-      />
-      <FloatingOrb
-        color="bg-buddy-gold"
-        size="w-[500px] h-[500px]"
-        top="40%"
-        left="80%"
-        delay={2}
       />
 
       {/* NAV */}
@@ -152,10 +291,17 @@ const App: React.FC = () => {
             </span>
           </div>
 
-          <div className="hidden md:flex items-center gap-10">
-            <button onClick={() => scrollTo("about-buddy")}>Kdo je Buddy?</button>
+          <div className="hidden md:flex items-center gap-10 font-bold">
+            <button onClick={() => scrollTo("about-buddy")}>
+              Kdo je Buddy?
+            </button>
             <button onClick={() => scrollTo("pricing")}>Tarify</button>
-            <button onClick={() => scrollTo("about-veronika")}>Veronika</button>
+            <button onClick={() => scrollTo("testimonials")}>
+              Reference
+            </button>
+            <button onClick={() => scrollTo("about-veronika")}>
+              Veronika
+            </button>
             <a
               href={TG_LINK}
               target="_blank"
@@ -168,7 +314,7 @@ const App: React.FC = () => {
 
           <button
             className="md:hidden"
-            onClick={() => setMenuOpen((v) => !v)}
+            onClick={() => setMenuOpen(!menuOpen)}
           >
             {menuOpen ? <X size={32} /> : <Menu size={32} />}
           </button>
@@ -176,11 +322,10 @@ const App: React.FC = () => {
       </nav>
 
       {/* HERO */}
-      <section className="relative min-h-screen flex items-center justify-center pt-32">
+      <section className="min-h-screen flex items-center justify-center pt-32">
         <BuddyHeroScene />
-
-        <div className="container mx-auto px-8 relative z-10 text-center">
-          <h1 className="text-6xl md:text-9xl font-serif font-bold text-buddy-teal mb-10">
+        <div className="container mx-auto px-8 text-center relative z-10">
+          <h1 className="text-6xl md:text-9xl font-serif font-bold text-buddy-teal mb-12">
             Buddy <br />
             <span className="text-buddy-gold">Veroniky V.</span>
           </h1>
@@ -204,34 +349,31 @@ const App: React.FC = () => {
               <span className="text-buddy-gold">Vinterová</span>
             </h2>
             <p className="text-lg text-stone-700">
-              Integrální koučka a zakladatelka projektů Náhoda a Opravdovost.
+              Integrální, vztahová a manažerská koučka. Zakladatelka
+              projektů Náhoda a Opravdovost.
             </p>
           </div>
 
-          <div className="relative">
-            <img
-              src="/veronika-about.jpg"
-              alt="Veronika Vinterová"
-              className="w-full rounded-[6rem] shadow-2xl"
-            />
-          </div>
+          <img
+            src="/veronika-about.jpg"
+            alt="Veronika Vinterová"
+            className="w-full rounded-[6rem] shadow-2xl"
+          />
         </div>
       </section>
 
       {/* FOOTER */}
       <footer className="bg-buddy-teal py-24 text-center">
-        <div className="container mx-auto px-8">
-          <div className="w-16 h-16 mx-auto mb-6 rounded-full overflow-hidden border-2 border-buddy-gold bg-white">
-            <img
-              src="/logo.png"
-              alt="VV Buddy"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <p className="text-white font-serif text-2xl">
-            Ing. Veronika Vinterová
-          </p>
+        <div className="w-16 h-16 mx-auto mb-6 rounded-full overflow-hidden border-2 border-buddy-gold bg-white">
+          <img
+            src="/logo.png"
+            alt="VV Buddy"
+            className="w-full h-full object-cover"
+          />
         </div>
+        <p className="text-white font-serif text-2xl">
+          Ing. Veronika Vinterová
+        </p>
       </footer>
     </div>
   );
