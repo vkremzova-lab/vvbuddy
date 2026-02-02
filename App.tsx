@@ -160,8 +160,8 @@ const App: React.FC = () => {
         <div className="container mx-auto px-8 flex justify-between items-center">
           <div className="flex items-center gap-4 cursor-pointer group" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <div className="w-14 h-14 rounded-full border-2 border-buddy-gold bg-white shadow-lg group-hover:rotate-6 transition-transform overflow-hidden flex items-center justify-center">
-               {/* Avatar Logo: input_file_0.png */}
-               <img src="input_file_0.png" alt="VV Avatar Logo" className="w-full h-full object-cover" />
+               {/* Buddy Logo: logo.png */}
+               <img src="/logo.png" alt="VV Buddy logo className="w-full h-full object-cover" />
             </div>
             <span className={`font-bold text-2xl tracking-tight transition-colors duration-300 ${scrolled ? 'text-white' : 'text-buddy-teal'}`}>VV Buddy</span>
           </div>
@@ -253,7 +253,7 @@ const App: React.FC = () => {
             <div className="absolute -inset-4 bg-buddy-gold/20 blur-3xl rounded-full group-hover:scale-110 transition-transform duration-700" />
             <div className="relative z-10 p-4 bg-white rounded-[3rem] shadow-2xl border-4 border-buddy-gold/20 transform hover:-rotate-2 transition-transform overflow-hidden">
               {/* Main intro portrait photo: input_file_1.png */}
-              <img src="input_file_1.png" alt="Veronika Vinterová" className="w-full h-auto rounded-[2.5rem]" />
+              <img src="/veronika-hero.jpg"/veronika-about.jpg" alt="Veronika Vinterová" className="w-full h-auto rounded-[2.5rem]"/>
             </div>
           </motion.div>
         </div>
@@ -424,7 +424,7 @@ const App: React.FC = () => {
           >
             <div className="relative w-full aspect-[4/5] overflow-hidden rounded-[8rem] rotate-2 shadow-2xl bg-white p-2">
               {/* Full body portrait: input_file_2.png */}
-              <img src="input_file_2.png" alt="Veronika Vinterová profil" className="w-full h-full object-cover rounded-[7.5rem] -rotate-2 scale-110" />
+              <img src="/veronika-about.jpg" alt="Veronika Vinterová profil" className="w-full h-full object-cover rounded-[7.5rem] -rotate-2 scale-110" />
               <div className="absolute inset-0 bg-gradient-to-t from-buddy-teal/20 to-transparent pointer-events-none" />
             </div>
             <div className="absolute -bottom-10 -right-10 w-48 h-48 bg-buddy-gold rounded-full -z-10 blur-2xl opacity-40 animate-pulse" />
@@ -448,7 +448,7 @@ const App: React.FC = () => {
           </div>
           <div className="flex flex-col items-center gap-4 mb-8">
             <div className="w-16 h-16 rounded-full border-2 border-buddy-gold bg-white shadow-lg overflow-hidden flex items-center justify-center">
-              {/* Footer Logo: input_file_0.png */}
+              {/* Footer Logo: logo.png */}
               <img src="input_file_0.png" alt="Veronika" className="w-full h-full object-cover" />
             </div>
             <p className="text-white font-serif text-3xl font-bold">Ing. Veronika Vinterová</p>
