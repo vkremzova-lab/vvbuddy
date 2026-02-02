@@ -459,6 +459,9 @@ const App: React.FC = () => {
     </div>
   );
 };
+<img src="/logo.png" alt="VV Buddy logo" />
+<img src="/veronika-hero.jpg" alt="Veronika – úvod" />
+<img src="/veronika-about.jpg" alt="Veronika – o ní" />
 
 
 
