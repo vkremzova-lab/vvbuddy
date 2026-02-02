@@ -459,5 +459,9 @@ const App: React.FC = () => {
     </div>
   );
 };
+<img src="/logo.png" />
+<img src="/veronika-hero.jpg" />
+<img src="/veronika-about.jpg" />
+
 
 export default App;
